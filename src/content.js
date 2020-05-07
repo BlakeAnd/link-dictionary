@@ -1,4 +1,4 @@
-window.addEventListener('load', function () {
+  window.addEventListener('load', function () {
     console.log("It's loaded!")
   
     let a_class = document.getElementsByClassName("rm-title-display");
@@ -18,7 +18,7 @@ window.addEventListener('load', function () {
       if (event.keyCode == 97){
         console.log(event.keyCode, String.fromCharCode(event.keyCode)); 
         // event.preventDefault();
-        console.log("the id", event.id);
+        console.log(document.activeElement.id);
       }
     };
     
