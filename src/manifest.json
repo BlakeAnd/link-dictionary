@@ -3,6 +3,7 @@
   "version": "1.0",    
   "description": "track and automate words that have been made into links/pages on roam research",    
   "manifest_version": 2,
+  "permissions": ["storage"],
   "content_scripts": 
 	[
 		{
