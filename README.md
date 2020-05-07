@@ -1,0 +1,3 @@
+this is the read me for a project to make an auto filling dictionary of linked words in roam
+
+...
