@@ -2,5 +2,13 @@
   "name": "roam-autolink",    
   "version": "1.0",    
   "description": "track and automate words that have been made into links/pages on roam research",    
-  "manifest_version": 2
+  "manifest_version": 2,
+  "content_scripts": 
+	[
+		{
+			"matches": ["https://roamresearch.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+		}
+	]
 }
