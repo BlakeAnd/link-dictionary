@@ -1,3 +1,3 @@
 document.onkeydown = function() {
-  alert('test)
+  console.log("test");
 };
