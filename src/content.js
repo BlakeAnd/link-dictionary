@@ -9,16 +9,16 @@
     
     document.onkeypress = function() {
       console.log("test");
-      // console.log(event.keyCode);
+      console.log(event.keyCode, event.Charcode);
     
     
       // if(document.getElementsByClassName("shoutbox").length > 0){
       //   alert('Chat is available.')
       // }
-      if (event.keyCode == 97){
+      if (event.keyCode == 32){
         console.log(event.keyCode, String.fromCharCode(event.keyCode)); 
         // event.preventDefault();
-        console.log(document.activeElement.id);
+        console.log(document.activeElement.innerHTML);
       }
     };
     
