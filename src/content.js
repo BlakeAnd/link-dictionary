@@ -19,6 +19,23 @@
         console.log(event.keyCode, String.fromCharCode(event.keyCode)); 
         // event.preventDefault();
         console.log(document.activeElement.innerHTML);
+        let str = document.activeElement.innerHTML;
+        // console.log(str[str.length-1]);
+        let space_found = false;
+        for(i = str.length-1; i > 0; i--){
+          console.log(str[i]);
+          if(str[i] === " " && space_found === false){
+            space_found = true;
+            str = str.slice(0, i+1) + "[[" + str.slice(i+1) + "]]"
+            break;
+          } else if (i === 1){
+            str = "[[" + str + "]]"
+          }
+        }
+        // str = str + "]]";
+        // console.log(str)
+        // // document.getElementById("block-input-PpsjPhmnnjdkWYiBg2nnDTjHHOA2-body-outline-05-08-2020-k5YKEc8J1").innerHTML = "hey!";
+        document.activeElement.value = str;
       }
     };
     
