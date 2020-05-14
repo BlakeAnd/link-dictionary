@@ -12,22 +12,20 @@
       console.log("test");
       console.log(event.keyCode, event.Charcode);
 
-      // let dictionary = {
-      //   "key concepts": "active",
-      //   "dreams": "active",
-      //   "to read": "active"
-      // }
+      let dictionary = {
+        "key concepts": "active",
+        "dreams": "active",
+        "to read": "active"
+      }
 
-      let dictionary = chrome.storage.local;
-      
-      dictionary.set({"dreams":"active"}, function() {
-        // console.log('Value is set to ' + value);
-      });
+      // chrome.storage.local.set({"dreams": "active"}, function() {
+      //   // console.log('Value is set to ' + );
+      // });
     
-      dictionary.get(['dreams'], function(result) {
-        return result;
-      });
-      console.log("local store", dictionary.get(['dream']));
+
+      //   chrome.storage.local.get([string], function(result) {
+      //     return result[string]
+      //   });
 
       let listen = -1;
       // if(document.getElementsByClassName("shoutbox").length > 0){
@@ -81,12 +79,19 @@
 
     function show_dictionary(dictionary){
       console.log("dict in show func", dictionary)
-      let dict_display = ""
-      for(let word in dictionary){
-        console.log(word)
-        dict_display = dict_display + word + ", ";
+      let dict_display = "ok"
+      // for(let word in dictionary){
+      //   console.log(word)
+      //   dict_display = dict_display + word + ", ";
+      // }
+      for (var i = 0; i < localStorage.length; i++){
+        // console.log(localStorage.getItem(chrome.localStorage.key(i)));
+        chrome.storage.local.get(['cloud'], function(result) {
+          dict_display = result;
+        });
       }
-      dict_display = dict_display.slice(0, dict_display.length-2);
+      // dict_display = dict_display.slice(0, dict_display.length-2);
+      console.log("dict display: ", dict_display);
       document.activeElement.value = dict_display;
     }
 
@@ -107,9 +112,11 @@
     }
 
     function add_word(dictionary, inner_str){
-      console.log("dict before", dictionary);
-      dictionary[inner_str] = "active";
-      console.log("dict after", dictionary);
+      // console.log("dict before", dictionary);
+      // dictionary[inner_str] = "active";
+      // console.log("dict after", dictionary);
+      chrome.storage.local.set({inner_str: "active"}, function() {});
+      
       document.activeElement.value = "";
     }
 
