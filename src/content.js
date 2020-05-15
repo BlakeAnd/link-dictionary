@@ -86,11 +86,10 @@
       // }
       for (var i = 0; i < localStorage.length; i++){
         // console.log(localStorage.getItem(chrome.localStorage.key(i)));
-        chrome.storage.local.get(['cloud'], function(result) {
-          dict_display = result;
-        });
+        
       }
       // dict_display = dict_display.slice(0, dict_display.length-2);
+      get_storage();
       console.log("dict display: ", dict_display);
       document.activeElement.value = dict_display;
     }
@@ -107,17 +106,33 @@
         show_dictionary(dictionary);
       } else if(str[0] === "+" && dictionary[inner_str] != "active"){
         event.preventDefault(); 
-        add_word(dictionary, inner_str);
+        add_word(inner_str);
       }
     }
 
-    function add_word(dictionary, inner_str){
+    function add_word(set_str){
       // console.log("dict before", dictionary);
       // dictionary[inner_str] = "active";
       // console.log("dict after", dictionary);
-      chrome.storage.local.set({inner_str: "active"}, function() {});
+      console.log("setting", set_str);
+      chrome.storage.local.set({set_str: "active"}, function() {
+        console.log("set: ", set_str);
+        get_storage(set_str);
+      });
       
       document.activeElement.value = "";
+    }
+
+    function get_storage (set_str) {
+      chrome.storage.local.get([`${set_str}`], function(result) {
+        // dict_display = result;
+        console.log("get: ", set_str);
+        console.log("chrome storage call returns:", result)
+        if(result == {}){
+          console.log("conditional!")
+        }
+      });
+      
     }
 
     function remove_word(dictionary){
