@@ -160,28 +160,20 @@
       let inner_str = str.slice(1);
       let dictionary = {};
       dictionary[inner_str] = "active"
-      console.log("dictionary at 1st:", dictionary);
-      chrome.storage.local.set({"dictionary": dictionary}, function() {
-        chrome.storage.local.get(["dictionary"], function(result) {
-          console.log(result);
-        });
-      });
+      chrome.storage.local.set({"dictionary": dictionary}, function() {});
     }
     
-    function add_word(set_str){
-      // // console.log("dict before", dictionary);
-      // // dictionary[inner_str] = "active";
-      // // console.log("dict after", dictionary);
-      //   chrome.storage.local.get(["dictionary"], function(result) {});
-
-      //   chrome.storage.local.set({"ok": "active"}, function() {
-      //     console.log("set: ", str);
-      //     get_storage(set_str);
-      //   });
-      // console.log("setting", set_str);
-      // set_str = set_str.toString();
-      
-      // document.activeElement.value = "";
+    function add_word(){
+      let str = document.activeElement.value;
+      let inner_str = str.slice(1);
+        chrome.storage.local.get(["dictionary"], function(result) {
+          let dictionary = result.dictionary;
+          if(dictionary[inner_str] != "active"){
+            dictionary[inner_str] = "active";
+          }
+          chrome.storage.local.set({"dictionary": dictionary}, function() {});
+        });
+      document.activeElement.value = "";
     }
 
     function remove_word(dictionary){
