@@ -12,11 +12,11 @@
       console.log("test");
       console.log(event.keyCode, event.Charcode);
 
-      let dictionary = {
-        "key concepts": "active",
-        "dreams": "active",
-        "to read": "active"
-      }
+      // let dictionary = {
+      //   "key concepts": "active",
+      //   "dreams": "active",
+      //   "to read": "active"
+      // }
 
       // chrome.storage.local.set({"dreams": "active"}, function() {
       //   // console.log('Value is set to ' + );
@@ -69,70 +69,119 @@
         // document.activeElement.value = str;
       }
       else if (event.keyCode == 43){
-        handle_plus(dictionary);
+        handle_plus();
       }
       else if (event.keyCode == 45){
-        remove_word(dictionary);  
+        handle_minus();  
       }
-      console.log("dict outside func", dictionary)
+      // console.log("dict outside func", dictionary)
     };
 
-    function show_dictionary(dictionary){
-      console.log("dict in show func", dictionary)
-      let dict_display = "ok"
-      // for(let word in dictionary){
-      //   console.log(word)
-      //   dict_display = dict_display + word + ", ";
-      // }
-      for (var i = 0; i < localStorage.length; i++){
-        // console.log(localStorage.getItem(chrome.localStorage.key(i)));
+    function show_dictionary(){
+      // let dict_display = "";
+      // if(dictionary_exists() === true){
+      // // for(let word in dictionary){
+      // //   console.log(word)
+      // //   dict_display = dict_display + word + ", ";
+      // // }
+      // chrome.storage.local.get(["dictionary"], function(result) {
+      //   console.log("chrome storage call returns:", result);
+      //   for(var key in result) {
+      //     console.log("key: ", key);
+      //     // if(result.hasOwnProperty(key)){
+      //     //   return true;
+      //     // }
+      //   }
+      // });
+      // for (var i = 0; i < dictionary.length; i++){
+      //   // console.log(localStorage.getItem(chrome.localStorage.key(i)));
         
-      }
-      // dict_display = dict_display.slice(0, dict_display.length-2);
-      get_storage();
-      console.log("dict display: ", dict_display);
-      document.activeElement.value = dict_display;
-    }
+      // }
+      // // dict_display = dict_display.slice(0, dict_display.length-2);
+        
+      // }
 
-    function handle_plus (dictionary) {
-      let str = document.activeElement.value;
-      let inner_str = str.slice(1);
-      console.log("in idct", dictionary[inner_str]);
-      console.log("len", inner_str.length);
-      // if (inner_str.length === 0 && str[0] === "+" && char_position === 1){
-      if(str === "+"){
-        event.preventDefault();
-      // console.log("len again", inner_str.length);
-        show_dictionary(dictionary);
-      } else if(str[0] === "+" && dictionary[inner_str] != "active"){
-        event.preventDefault(); 
-        add_word(inner_str);
-      }
-    }
-
-    function add_word(set_str){
-      // console.log("dict before", dictionary);
-      // dictionary[inner_str] = "active";
-      // console.log("dict after", dictionary);
-      console.log("setting", set_str);
-      chrome.storage.local.set({set_str: "active"}, function() {
-        console.log("set: ", set_str);
-        get_storage(set_str);
-      });
-      
-      document.activeElement.value = "";
-    }
-
-    function get_storage (set_str) {
-      chrome.storage.local.get([`${set_str}`], function(result) {
-        // dict_display = result;
-        console.log("get: ", set_str);
-        console.log("chrome storage call returns:", result)
-        if(result == {}){
-          console.log("conditional!")
+      // console.log("dict display: ", dict_display);
+      // document.activeElement.value = dict_display;
+      chrome.storage.local.clear(function() {
+        var error = chrome.runtime.lastError;
+        if (error) {
+            console.error(error);
         }
       });
+    }
+
+    function handle_plus () {
+      let str = document.activeElement.value;
+      let inner_str = str.slice(1);
+      if(str === "+"){
+        event.preventDefault();
+        dictionary_exists("show dictionary");
+      } 
+      else if(str[0] === "+" && inner_str.length > 0){
+        event.preventDefault(); 
+        dictionary_exists("add word");
+      }
+    }
+
+    function dictionary_exists (action) {
+      let it_exists = false;
+      chrome.storage.local.get(["dictionary"], function(result) {
+        console.log("dictionary call returns:", result);
+        for(var key in result) {
+          console.log("key: ", key);
+          console.log("hasprop", result.hasOwnProperty(key));
+          if(result.hasOwnProperty(key)){
+            it_exists = true;
+          }
+        }
+        if(it_exists === true){
+          if(action === "show dictionary"){
+            show_dictionary();
+          }
+          else if (action === "add word"){
+            add_word();
+          }
+          else if (action === "remove word"){
+
+          }
+        } 
+        else {
+          if(action === "add word"){
+            add_first_word();
+          }
+        }
+      });
+
+    }
+
+    function add_first_word (){
+      let str = document.activeElement.value;
+      let inner_str = str.slice(1);
+      let dictionary = {};
+      dictionary[inner_str] = "active"
+      console.log("dictionary at 1st:", dictionary);
+      chrome.storage.local.set({"dictionary": dictionary}, function() {
+        chrome.storage.local.get(["dictionary"], function(result) {
+          console.log(result);
+        });
+      });
+    }
+    
+    function add_word(set_str){
+      // // console.log("dict before", dictionary);
+      // // dictionary[inner_str] = "active";
+      // // console.log("dict after", dictionary);
+      //   chrome.storage.local.get(["dictionary"], function(result) {});
+
+      //   chrome.storage.local.set({"ok": "active"}, function() {
+      //     console.log("set: ", str);
+      //     get_storage(set_str);
+      //   });
+      // console.log("setting", set_str);
+      // set_str = set_str.toString();
       
+      // document.activeElement.value = "";
     }
 
     function remove_word(dictionary){
