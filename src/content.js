@@ -27,46 +27,8 @@
       //     return result[string]
       //   });
 
-      let listen = -1;
-      // if(document.getElementsByClassName("shoutbox").length > 0){
-      //   alert('Chat is available.')
-      // }
-      if (event.keyCode == listen){
-        listen = -1;
-        //other logic
-      }
-      else if (event.keyCode == 32){
-          //space event, check previous char to make decision
-          //if previous char is +, loop back to previous space and link word (same function as multi word should work
-          // get_cursor_position();
-
-
-
-        // console.log(event.keyCode, String.fromCharCode(event.keyCode)); 
-        // // event.preventDefault();
-        // //console.log(document.activeElement.innerHTML);
-        // let str = document.activeElement.innerHTML;
-        // // console.log(str[str.length-1]);
-        // let space_found = false;
-        // let word_string = "";
-        // for(i = str.length-1; i > 0; i--){
-        //   word_string = word_string + str;
-        //   console.log(str[i]);
-        //   if(str[i] === " " && space_found === false){
-        //     space_found = true;
-        //     // console.log("string to end:", str.slice(i+1));
-        //     str = str.slice(0, i+1) + "[[" + str.slice(i+1) + "]]"
-        //     break;
-        //   } else if (i === 1){
-        //     str = "[[" + str + "]]"
-        //   }
-        // }
-        // console.log("WORD", word_string);
-        // // str = str + "]]";
-        // // console.log(str)
-        // // // document.getElementById("block-input-PpsjPhmnnjdkWYiBg2nnDTjHHOA2-body-outline-05-08-2020-k5YKEc8J1").innerHTML = "hey!";
-
-        // document.activeElement.value = str;
+      if (event.keyCode == 32){
+        handle_other();
       }
       else if (event.keyCode == 43){
         handle_plus();
@@ -74,7 +36,6 @@
       else if (event.keyCode == 45){
         handle_minus();  
       }
-      // console.log("dict outside func", dictionary)
     };
 
     function show_dictionary(){
@@ -98,6 +59,14 @@
       //       console.error(error);
       //   }
       // });
+    }
+
+    function handle_other(){
+      let str = document.activeElement.value;
+      let inner_str = str.slice(1);
+      if(str[0] != "+" && str[0] != "-"){
+        dictionary_exists("check for link");
+      }
     }
 
     function handle_plus () {
@@ -143,6 +112,9 @@
           else if (action === "remove word"){
             remove_word();
           }
+          else if(action === "check for link"){
+            check_link();
+          }
         } 
         else {
           if(action === "add word"){
@@ -151,6 +123,24 @@
         }
       });
 
+    }
+
+    function check_link() {
+      let str = document.activeElement.value;
+      chrome.storage.local.get(["dictionary"], function(result) {
+        let dictionary = result.dictionary;
+        console.log("dot dict", dictionary);
+        for(var key in dictionary) {
+          if(str.includes(key) === true && str.includes(`[[${key}]]`) === false){
+            str = str.slice(0, str.indexOf(key)) + "[[" + key + "]]" + str.slice(str.indexOf(key) + key.length)
+            console.log(str);
+          }
+          // console.log(str.includes(key) === true && str.includes(`[[${key}]]`));
+        }
+        // dict_display = dict_display.slice(0, dict_display.length-2);
+        // console.log("dis", dict_display);
+        // document.activeElement.value = dict_display;
+      });
     }
 
     function add_first_word (){
