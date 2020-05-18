@@ -124,6 +124,15 @@
       }
     }
 
+    function handle_minus () {
+      let str = document.activeElement.value;
+      let inner_str = str.slice(1);
+      if(str[0] === "-" && inner_str.length > 0){
+        event.preventDefault(); 
+        dictionary_exists("remove word");
+      }
+    }
+
     function dictionary_exists (action) {
       let it_exists = false;
       chrome.storage.local.get(["dictionary"], function(result) {
@@ -143,7 +152,7 @@
             add_word();
           }
           else if (action === "remove word"){
-
+            remove_word();
           }
         } 
         else {
@@ -176,14 +185,17 @@
       document.activeElement.value = "";
     }
 
-    function remove_word(dictionary){
+    function remove_word(){
       let str = document.activeElement.value;
       let inner_str = str.slice(1);
-      console.log("in idct", dictionary[inner_str]);
-      if(str[0] === "-" && dictionary[inner_str] === "active"){
-        dictionary[inner_str] = "inactive";
-      }
-      document.activeElement.value = "";
+      chrome.storage.local.get(["dictionary"], function(result) {
+        let dictionary = result.dictionary;
+        if(dictionary[inner_str] === "active"){
+          dictionary[inner_str] = "inactive";
+        }
+        chrome.storage.local.set({"dictionary": dictionary}, function() {});
+      });
+    document.activeElement.value = "";
     }
 
     function get_cursor_position(){
