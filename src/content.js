@@ -78,37 +78,26 @@
     };
 
     function show_dictionary(){
-      // let dict_display = "";
-      // if(dictionary_exists() === true){
-      // // for(let word in dictionary){
-      // //   console.log(word)
-      // //   dict_display = dict_display + word + ", ";
-      // // }
-      // chrome.storage.local.get(["dictionary"], function(result) {
-      //   console.log("chrome storage call returns:", result);
-      //   for(var key in result) {
-      //     console.log("key: ", key);
-      //     // if(result.hasOwnProperty(key)){
-      //     //   return true;
-      //     // }
+      console.log("SHOW");
+      let dict_display = "";
+      chrome.storage.local.get(["dictionary"], function(result) {
+        let dictionary = result.dictionary;
+        console.log("dot dict", dictionary);
+        for(var key in dictionary) {
+          if(dictionary[key] === "active"){
+            dict_display = dict_display + key + ", ";
+          }
+        }
+        dict_display = dict_display.slice(0, dict_display.length-2);
+        console.log("dis", dict_display);
+        document.activeElement.value = dict_display;
+      });
+      // chrome.storage.local.clear(function() {
+      //   var error = chrome.runtime.lastError;
+      //   if (error) {
+      //       console.error(error);
       //   }
       // });
-      // for (var i = 0; i < dictionary.length; i++){
-      //   // console.log(localStorage.getItem(chrome.localStorage.key(i)));
-        
-      // }
-      // // dict_display = dict_display.slice(0, dict_display.length-2);
-        
-      // }
-
-      // console.log("dict display: ", dict_display);
-      // document.activeElement.value = dict_display;
-      chrome.storage.local.clear(function() {
-        var error = chrome.runtime.lastError;
-        if (error) {
-            console.error(error);
-        }
-      });
     }
 
     function handle_plus () {
