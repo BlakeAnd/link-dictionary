@@ -7,6 +7,9 @@
     let nodes = a_class;
     console.log("span log", nodes);
 
+    let longest_link = 0;
+    
+
     
     document.onkeypress = function() {
       console.log("test");
@@ -62,6 +65,7 @@
     }
 
     function handle_other(){
+      console.log("link length", longest_link);
       let str = document.activeElement.value;
       let inner_str = str.slice(1);
       if(str[0] != "+" && str[0] != "-"){
@@ -146,12 +150,25 @@
       });
     }
 
+    function get_link () {
+      chrome.storage.local.get(["longest_link"], function(result) {
+        if(typeof(result) === "number"){
+          return result;
+        }
+        else{
+          return 0;
+        }
+      });
+    }
+
     function add_first_word (){
       let str = document.activeElement.value;
       let inner_str = str.slice(1);
       let dictionary = {};
+      longest_link = inner_str.length;
       dictionary[inner_str] = "active"
       chrome.storage.local.set({"dictionary": dictionary}, function() {});
+      chrome.storage.local.set({"longest_link": longest_link}, function() {});
     }
     
     function add_word(){
