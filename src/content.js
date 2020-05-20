@@ -131,42 +131,15 @@
       chrome.storage.local.get(["dictionary"], function(result) {
         let dictionary = result.dictionary;
         console.log("dot dict", dictionary);
-        let detected = true;
-        let count = 0;
-        let word_indices = [];
-        let index_adjuster = 0;
-        for(var key in dictionary) { 
-          detected = true;
-          while(detected === true && count < 100){
-            detected = false;
-            count ++;
-            if(str.includes(`${key}`) === true && str.includes(`[[${key}]]`) === false){
-              index_adjuster = index_adjuster + str.indexOf(key);
-              word_indices.push(str.indexOf(key));
-              detected = true;
-              str = str.slice(str.indexOf(key) + key.length);
-              console.log("new str", str)
-            }
-          }
-            // detected = true;
-            // last_str_starts = str.indexOf(key) + key.length;
-            // str = str.slice(0, str.indexOf(key)) + "[[" + key + "]]" + str.slice(last_str_starts);
-            // console.log(display_str);
-            // str = str.slice(last_str_starts);
-            // console.log("LEN", str.length);
 
-          // else if (str.includes(`[[${key}]]`) === true){  
-          //   detected = true;
-          //   str = str.slice(last_str_starts);
-          // }
-          // console.log(str.includes(key) === true && str.includes(`[[${key}]]`));
+        for(var key in dictionary) { 
+
         }
-        console.log("word starts", word_indices);
         // if(detected === false){
         //   display_str = display_str + str.slice(last_str_starts);
         //   console.log("final", display_str);
         // }
-        document.activeElement.value = str;
+        document.activeElement.value = display_str;
         // dict_display = dict_display.slice(0, dict_display.length-2);
         // console.log("dis", dict_display);
         // document.activeElement.value = dict_display;
