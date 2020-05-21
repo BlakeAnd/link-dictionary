@@ -7,7 +7,7 @@
     let nodes = a_class;
     console.log("span log", nodes);
 
-    let longest_link = 0;
+    let longest_link = get_link_at_start();
     
 
     
@@ -132,6 +132,9 @@
     function check_link() {
       let str = document.activeElement.value;
       let display_str = document.activeElement.value;
+
+      let cursor_index = get_cursor_position();
+      console.log("|", cursor_index);
       chrome.storage.local.get(["dictionary"], function(result) {
         let dictionary = result.dictionary;
         console.log("dot dict", dictionary);
@@ -150,10 +153,10 @@
       });
     }
 
-    function get_link () {
+    function get_link_at_start () {
       chrome.storage.local.get(["longest_link"], function(result) {
-        if(typeof(result) === "number"){
-          return result;
+        if(typeof(result.longest_link) === "number"){
+          return result.longest_link;
         }
         else{
           return 0;
@@ -181,6 +184,14 @@
           }
           chrome.storage.local.set({"dictionary": dictionary}, function() {});
         });
+        chrome.storage.local.get(["longest_link"], function(result) {
+          if(inner_str.length > result.longest_link){
+            longest_link = inner_str.length;
+            chrome.storage.local.set({"longest_link": longest_link}, function() {});
+          }  
+          console.log("longo", inner_str.length, result);
+        });
+
       document.activeElement.value = "";
     }
 
