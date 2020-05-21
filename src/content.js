@@ -129,24 +129,48 @@
 
     }
 
+    // function add_link (){
+    //   document.activeElement.value = check_link();
+    // }
+
     function check_link() {
       let str = document.activeElement.value;
       let display_str = document.activeElement.value;
-
+      let check_str = "";
+      let min = 0;
+      let max = str.length;
       let cursor_index = get_cursor_position();
-      console.log("|", cursor_index);
+      if(cursor_index-longest_link > 0){
+        min = cursor_index-longest_link;
+      }
+      if(cursor_index+longest_link < str.length){
+        max = cursor_index+longest_link;
+      }
+
       chrome.storage.local.get(["dictionary"], function(result) {
         let dictionary = result.dictionary;
         console.log("dot dict", dictionary);
 
-        for(var key in dictionary) { 
+        for(let i = min; i < cursor_index-1; i++){
+          check_str = str.slice(i, cursor_index-1);
+          console.log("check str", check_str, dictionary, dictionary["beep"], dictionary[check_str]);
+          if(dictionary[check_str] === "active" && str[i-1] != "["){
+           str = str.slice(0, i) + "[[" + check_str + "]]" + str.slice(cursor_index);
+           console.log("linked str", str);
+           document.activeElement.value = str;
+           str = document.activeElement.value;
+           str.selectionEnd= cursor_index;
 
+          }
+        }
+        for(let i = max; i > cursor_index; i--){
+          
         }
         // if(detected === false){
         //   display_str = display_str + str.slice(last_str_starts);
         //   console.log("final", display_str);
         // }
-        document.activeElement.value = display_str;
+        // document.activeElement.value = display_str;
         // dict_display = dict_display.slice(0, dict_display.length-2);
         // console.log("dis", dict_display);
         // document.activeElement.value = dict_display;
