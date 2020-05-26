@@ -41,3 +41,4 @@ TO DO!
 -make it so lines starting with + or - cannot trigger auto-link-recognition
 -make search of dictionary non-case-sensitive
 -make shortcut for clearing dictionary when listed out (possibly typing -- at the end of the string)
+-get autofill working for saved words and phrases, detect partial strings in dictionary (includes method?) and interface with roams autofill somehow
