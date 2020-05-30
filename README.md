@@ -10,7 +10,7 @@ try to (things that appear possible from chrome extension docs)
 detect if url is roam [done]
 detect keystrokes from user [done]
 
-if i can do those
+if i can do those.
 
 add any word with [[]] around it to a dictionary(type thing) [working on / different approach maybe necessary]
 search the dictionary of words for all future words (every keystroke? every space so it only fires at the end of the word?)
