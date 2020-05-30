@@ -22,23 +22,17 @@ if it matches, inject the [[]] around the word (not sure if possible, but i thin
 .
 .
 
-logic to check a string (multi word)
 
-upon hitting space
-loop backwards through chars in string from end to cover longest stored string
-store location of every space character along the way
-at the end of the loop, check if last(leftmost) character is a space, as it should be if the string matches
-if yes, check if string matches
-if no to either, move right to next space and check if there is a matching string from there to the end, repeat til last space
-
-if a string match occurs, link it and stop checking
-
-WRONG, THIS WILL ONLY WORK WITH LINEAR TYPING. NEED TO CHECK WHOLE DOC BECAUSE WORDS CAN BE ADDED TO MIDDLE OR CHECK IF CHARACTER INSERT LOCATION CAN BE FOUND
 
 TO DO!
 -CLEAN UP COMMENTED CODE, ADD ACTUAL COMMENTS
+
 -make search fire on any letter keystroke (possibly excluding + and -) rather than just space
+
 -make it so lines starting with + or - cannot trigger auto-link-recognition
+
 -make search of dictionary non-case-sensitive
+
 -make shortcut for clearing dictionary when listed out (possibly typing -- at the end of the string)
+
 -get autofill working for saved words and phrases, detect partial strings in dictionary (includes method?) and interface with roams autofill somehow
