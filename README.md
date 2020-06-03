@@ -1,34 +1,33 @@
 this is the read me for a project to make a dictionary of auto-linking words in roam
--------------------------------------------------------------
+----------------------------------------------------------------
 ### USER INSTRUCTIONS
-this currently a basic version of an automatic linking tool for roam
+* this currently a basic version of an automatic linking tool for roam
 
-any time you type a word that is in your dictionary of saved words it will automatically make it a link
+* any time you type a word that is in your dictionary of saved words it will automatically make it a link
 
-this is currently triggered by the SPACE BUTTON, notably this means that for now you will have to hit space before you hit enter to link words at the end of a line
+* this is currently triggered by the SPACE BUTTON, notably this means that for now you will have to hit space before you hit enter to link words at the end of a line
 
-so if we have "dog" saved as a link "my dog is the best" will become "my [[dog]] is the best"
+* so if we have "dog" saved as a link "my dog is the best" will become "my [[dog]] is the best"
 
 #### TO ADD A WORD
-start a new line in roam
+* start a new line in roam
 
-type your word on the new line wrapped in + signs
-like so
+* type your word on the new line wrapped in + signs like so
 
 +word or phrase+
 
 #### TO REMOVE A WORD
 
-same as above but with - signs, like so
+* same as above but with - signs, like so
 
 -word or phrase-
 
 #### TO SEE WHAT WORDS YOU HAVE SET TO AUTOLINK
-go to a new line in roam and type ++
+* go to a new line in roam and type ++
 
 ------------------------------------------------------------------
 
-design outline for roam word glossary
+### design outline for roam word glossary
 
 try to (things that appear possible from chrome extension docs)
 detect if url is roam [done]
