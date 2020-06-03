@@ -5,7 +5,7 @@ this currently a basic version of an automatic linking tool for roam
 
 any time you type a word that is in your dictionary of saved words it will automatically make it a link
 
-this is currently triggered by the SPACE BUTTON, notably this means that for now you will have to hit space to link words at the end of a line
+this is currently triggered by the SPACE BUTTON, notably this means that for now you will have to hit space before you hit enter to link words at the end of a line
 
 so if we have "dog" saved as a link "my dog is the best" will become "my [[dog]] is the best"
 
