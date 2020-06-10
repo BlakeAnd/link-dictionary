@@ -49,6 +49,8 @@
       }
     }
 
+    //checks if the dictionary has been created in the chrome api and calls functions based on the and a control string
+    //this needs to be restructured so we are not calling the chrome api so much, something similar to the way the storage of longest link is handled
     function dictionary_exists (action) {
       let it_exists = false;
       chrome.storage.local.get(["dictionary"], function(result) {
