@@ -24,11 +24,13 @@ this is the read me for a project to make a dictionary of auto-linking words in 
 
 #### TO SEE WHAT WORDS YOU HAVE SET TO AUTOLINK
 * go to a new line in roam and type two plus signs, like so
+
 ++
 * this will display all the links you currently have, like so
 links: word, example phrase.
 #### TO CLEAR THE PRINTED WORDS
 * if you have hit ++ and displayed your currently linked word you can type dash at the end of the line to clear it, like so
+
 links: word, example phrase.-
 
 
