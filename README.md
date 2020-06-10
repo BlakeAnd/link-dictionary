@@ -7,7 +7,7 @@ this is the read me for a project to make a dictionary of auto-linking words in 
 
 * this is currently triggered by the SPACE BUTTON, notably this means that for now you will have to hit space before you hit enter to link words at the end of a line
 
-* so if we have "dog" saved as a link "my dog is the best" will become "my [[dog]] is the best"
+* so if we have "dog" saved as am autolink "my dog is the best" will become "my [[dog]] is the best"
 
 #### TO ADD A WORD
 * start a new line in roam
@@ -34,10 +34,10 @@ links: word, example phrase.-
 
 ------------------------------------------------------------------
 
-TO DO/IDEAS
+### TO DO/IDEAS
 [ ] CLEAN UP COMMENTED CODE, ADD ACTUAL COMMENTS
 
-[ ] make search fire on any letter keystroke (possibly excluding + and -) rather than just space
+[+] make search fire on any letter keystroke (possibly excluding + and -) rather than just space [DONE]
 
 [ ] make it so lines starting with + or - cannot trigger auto-link-recognition (maybe do't do this, adding links containing smaller links will cause other more difficult problems)
 
@@ -58,6 +58,8 @@ TO DO/IDEAS
 [ ] stop the words "link: ." from displaying when there are no linked words to display
 
 [ ] restructure dicitonary to set a local variable based on chrome storage so that chrome storage is not being called for every keystroke which could cause latency problems
+
+.
 -------------------------------------------------------------------
 old notes 
 
