@@ -23,7 +23,14 @@ this is the read me for a project to make a dictionary of auto-linking words in 
 -word or phrase-
 
 #### TO SEE WHAT WORDS YOU HAVE SET TO AUTOLINK
-* go to a new line in roam and type ++
+* go to a new line in roam and type two plus signs, like so
+++
+* this will display all the links you currently have, like so
+links: word, example phrase.
+#### TO CLEAR THE PRINTED WORDS
+* if you have hit ++ and displayed your currently linked word you can type dash at the end of the line to clear it, like so
+links: word, example phrase.-
+
 
 ------------------------------------------------------------------
 
@@ -49,14 +56,21 @@ if it matches, inject the [[]] around the word (not sure if possible, but i thin
 
 
 TO DO!
--CLEAN UP COMMENTED CODE, ADD ACTUAL COMMENTS
+[ ] CLEAN UP COMMENTED CODE, ADD ACTUAL COMMENTS
 
--make search fire on any letter keystroke (possibly excluding + and -) rather than just space
+[ ] make search fire on any letter keystroke (possibly excluding + and -) rather than just space
 
--make it so lines starting with + or - cannot trigger auto-link-recognition
+[ ] make it so lines starting with + or - cannot trigger auto-link-recognition (maybe do't do this, adding links containing smaller links will cause other more difficult problems)
 
--make search of dictionary non-case-sensitive
+[ ] make search of dictionary non-case-sensitive
 
--make shortcut for clearing dictionary when listed out (possibly typing -- at the end of the string)
+[x] make shortcut for clearing dictionary when listed out (possibly typing -- at the end of the string) [DONE]
 
--get autofill working for saved words and phrases, detect partial strings in dictionary (includes method?) and interface with roams autofill somehow
+[ ] get autofill working for saved words and phrases, detect partial strings in dictionary (includes method?) and maybe interface with roams autofill somehow..
+
+[ ] build checkbox/form style GUI to manage words
+
+[ ] make syntax to add or remove words that doesn not require going to a new line (possibly something like [[word+]])
+
+
+

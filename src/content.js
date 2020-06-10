@@ -13,14 +13,16 @@
       console.log("test");
       console.log(event.keyCode, event.Charcode);
 
-      if (event.keyCode == 32){
-        handle_other();
-      }
-      else if (event.keyCode == 43){
+
+      if (event.keyCode == 43){
         handle_plus();
       }
       else if (event.keyCode == 45){
         handle_minus();  
+      }
+      else {
+        console.log("event.key: ", event.key)
+        handle_other();
       }
     };
 
@@ -36,7 +38,7 @@
           }
         }
         dict_display = dict_display.slice(0, dict_display.length-2);
-        dict_display = "links: " + dict_display;
+        dict_display = "links: " + dict_display + ".";
         document.activeElement.value = dict_display;
       }); 
 
@@ -76,6 +78,9 @@
       if(str[0] === "-" && inner_str.length > 0){
         event.preventDefault(); 
         dictionary_exists("remove word");
+      } 
+      else {
+        dictionary_exists("hide dictionary")
       }
     }
 
@@ -103,6 +108,10 @@
           else if(action === "check for link"){
             check_link();
           }
+          else if(action === "hide dictionary"){
+            console.log("action hide")
+            hide_dictionary();
+          }
         } 
         else {
           if(action === "add word"){
@@ -116,6 +125,25 @@
     // function add_link (){
     //   document.activeElement.value = check_link();
     // }
+    function hide_dictionary (){
+      console.log("HIDE")
+      let str = document.activeElement.value;
+      let dict_display = "";
+      chrome.storage.local.get(["dictionary"], function(result) {
+        let dictionary = result.dictionary;
+        console.log("dot dict", dictionary);
+        for(var key in dictionary) {
+          if(dictionary[key] === "active"){
+            dict_display = dict_display + key + ", ";
+          }
+        }
+        dict_display = dict_display.slice(0, dict_display.length-2);
+        console.log(dict_display, str)
+        if(str = dict_display){
+          document.activeElement.value = "";
+        }
+      });
+    }
 
     function check_link() {
       let str = document.activeElement.value;
