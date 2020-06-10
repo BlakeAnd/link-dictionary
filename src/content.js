@@ -39,6 +39,7 @@
         dict_display = "links: " + dict_display;
         document.activeElement.value = dict_display;
       }); 
+
       // chrome.storage.local.clear(function() {
       //   var error = chrome.runtime.lastError;
       //   if (error) {
@@ -142,7 +143,7 @@
         for(let i = min; i < cursor_index-1; i++){
           check_str = str.slice(i, cursor_index-1);
           console.log("check str", check_str, dictionary, dictionary["beep"], dictionary[check_str]);
-          if(dictionary[check_str] === "active" && str[i-1] != "["){
+          if(dictionary[check_str] === "active" && (min === 0 || str[i-1] === " ")){
            str = str.slice(0, i) + "[[" + check_str + "]] " + str.slice(cursor_index);
            console.log("linked str", str);
            document.activeElement.value = str;
