@@ -62,6 +62,7 @@ links: word, example phrase.-
 [] figure out why cursor stays inside word sometimes and fix it
 
 [] make a way/command to set all links to be autolinks
+
 .
 -------------------------------------------------------------------
 old notes 
