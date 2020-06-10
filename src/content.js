@@ -7,28 +7,11 @@
     let nodes = a_class;
     console.log("span log", nodes);
 
-    let longest_link = get_link_at_start();
-    
-
+     var longest_link = get_link_at_start();
     
     document.onkeypress = function() {
       console.log("test");
       console.log(event.keyCode, event.Charcode);
-
-      // let dictionary = {
-      //   "key concepts": "active",
-      //   "dreams": "active",
-      //   "to read": "active"
-      // }
-
-      // chrome.storage.local.set({"dreams": "active"}, function() {
-      //   // console.log('Value is set to ' + );
-      // });
-    
-
-      //   chrome.storage.local.get([string], function(result) {
-      //     return result[string]
-      //   });
 
       if (event.keyCode == 32){
         handle_other();
@@ -53,9 +36,9 @@
           }
         }
         dict_display = dict_display.slice(0, dict_display.length-2);
-        console.log("dis", dict_display);
+        dict_display = "links: " + dict_display;
         document.activeElement.value = dict_display;
-      });
+      }); 
       // chrome.storage.local.clear(function() {
       //   var error = chrome.runtime.lastError;
       //   if (error) {
@@ -65,7 +48,7 @@
     }
 
     function handle_other(){
-      console.log("link length", longest_link);
+      // console.log("link length", longest_link);
       let str = document.activeElement.value;
       let inner_str = str.slice(1);
       if(str[0] != "+" && str[0] != "-"){
@@ -139,9 +122,14 @@
       let check_str = "";
       let min = 0;
       let max = str.length;
+      // chrome.storage.local.get(["longest_link"], function(result) {
+      //   if(typeof(result.longest_link) === "number"){
+      //     longest_link = result.longest_link;
+      //   }
+      
       let cursor_index = get_cursor_position();
       if(cursor_index-longest_link > 0){
-        min = cursor_index-longest_link;
+        min = cursor_index-longest_link-1;
       }
       if(cursor_index+longest_link < str.length){
         max = cursor_index+longest_link;
@@ -159,7 +147,7 @@
            console.log("linked str", str);
            document.activeElement.value = str;
            document.activeElement.selectionEnd = cursor_index + 4;
-
+           break;
           }
         }
         for(let i = max; i > cursor_index; i--){
@@ -174,6 +162,7 @@
         // console.log("dis", dict_display);
         // document.activeElement.value = dict_display;
       });
+    // });
     }
 
     function get_link_at_start () {
