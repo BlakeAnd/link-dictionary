@@ -34,28 +34,7 @@ links: word, example phrase.-
 
 ------------------------------------------------------------------
 
-### design outline for roam word glossary
-
-try to (things that appear possible from chrome extension docs)
-detect if url is roam [done]
-
-detect keystrokes from user [done]
-
-if i can do those.
-
-add any word with [[]] around it to a dictionary(type thing) [working on / different approach maybe necessary]
-search the dictionary of words for all future words (every keystroke? every space so it only fires at the end of the word?)
-
-if it matches, inject the [[]] around the word (not sure if possible, but i think so)
-
-
-.
-.
-.
-
-
-
-TO DO!
+TO DO/IDEAS
 [ ] CLEAN UP COMMENTED CODE, ADD ACTUAL COMMENTS
 
 [ ] make search fire on any letter keystroke (possibly excluding + and -) rather than just space
@@ -70,7 +49,27 @@ TO DO!
 
 [ ] build checkbox/form style GUI to manage words
 
-[ ] make syntax to add or remove words that doesn not require going to a new line (possibly something like [[word+]])
+[ ] make syntax to add or remove words that doesn not require going to a new line (possibly something like [[word+]]) (this would also give the user access to roams autcomplete when adding a new link!!)
 
+[ ] add shortcut for displaying instructions (/autolink-i, or something)
+
+[ ] ability to add multiple new links at once, comma separated (for example +ok, yes, word, and phrase+)
+
+[ ] stop the words "link: ." from displaying when there are no linked words to display
+
+[ ] restructure dicitonary to set a local variable based on chrome storage so that chrome storage is not being called for every keystroke which could cause latency problems
+-------------------------------------------------------------------
+old notes 
+
+detect if url is roam [done]
+
+[x] detect keystrokes from user [done]
+
+if i can do those.
+
+add any word with [[]] around it to a dictionary(type thing) [working on / different approach maybe necessary]
+search the dictionary of words for all future words (every keystroke? every space so it only fires at the end of the word?)
+
+if it matches, inject the [[]] around the word (not sure if possible, but i think so) [DONE]
 
 

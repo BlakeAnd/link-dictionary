@@ -8,6 +8,7 @@
     console.log("span log", nodes);
 
      var longest_link = get_link_at_start();
+     let text_key = null;
     
     document.onkeypress = function() {
       console.log("test");
@@ -22,6 +23,7 @@
       }
       else {
         console.log("event.key: ", event.key)
+        text_key = event.key;
         handle_other();
       }
     };
@@ -138,8 +140,9 @@
           }
         }
         dict_display = dict_display.slice(0, dict_display.length-2);
+        dict_display = "links: " + dict_display + ".-";
         console.log(dict_display, str)
-        if(str = dict_display){
+        if(str === dict_display){
           document.activeElement.value = "";
         }
       });
@@ -155,6 +158,8 @@
       //   if(typeof(result.longest_link) === "number"){
       //     longest_link = result.longest_link;
       //   }
+
+      //str = str + text_key;
       
       let cursor_index = get_cursor_position();
       if(cursor_index-longest_link > 0){
@@ -169,7 +174,7 @@
         console.log("dot dict", dictionary);
 
         for(let i = min; i < cursor_index-1; i++){
-          check_str = str.slice(i, cursor_index-1);
+          check_str = str.slice(i, cursor_index);
           console.log("check str", check_str, dictionary, dictionary["beep"], dictionary[check_str]);
           if(dictionary[check_str] === "active" && (min === 0 || str[i-1] === " ")){
            str = str.slice(0, i) + "[[" + check_str + "]] " + str.slice(cursor_index);
