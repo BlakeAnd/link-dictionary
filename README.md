@@ -47,7 +47,7 @@ links: word, example phrase.-
 
 [ ] get autofill working for saved words and phrases, detect partial strings in dictionary (includes method?) and maybe interface with roams autofill somehow..
 
-[ ] build checkbox/form style GUI to manage words
+[ ] build checkbox/form style GUI to manage words. draw this first
 
 [ ] make syntax to add or remove words that doesn not require going to a new line (possibly something like [[word+]]) (this would also give the user access to roams autcomplete when adding a new link!!)
 
@@ -59,6 +59,9 @@ links: word, example phrase.-
 
 [ ] restructure dicitonary to set a local variable based on chrome storage so that chrome storage is not being called for every keystroke which could cause latency problems
 
+[] figure out why cursor stays inside word sometimes and fix it
+
+[] make a way/command to set all links to be autolinks
 .
 -------------------------------------------------------------------
 old notes 
