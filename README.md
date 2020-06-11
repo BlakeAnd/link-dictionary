@@ -43,7 +43,7 @@ links: word, example phrase.-
 
 [ ] make it so lines starting with + or - cannot trigger auto-link-recognition (maybe do't do this, adding links containing smaller links will cause other more difficult problems)
 
-[ ] make search of dictionary non-case-sensitive
+[ ] make matching in autlink dictionary non-case-sensitive
 
 [x] make shortcut for clearing dictionary when listed out (possibly typing -- at the end of the string) [DONE]
 

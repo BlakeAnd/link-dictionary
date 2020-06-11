@@ -2,6 +2,7 @@
 
      var longest_link = get_link_at_start();
      let text_key = null;
+     let directions = `you can type - at the end of the directions to clear them away COMMANDS, TO ADD A WORD: start a new line and type +your word or phrase+ TO REMOVE A WORD: start a new line and type -your word or phrase- SEE ALL WORDS SET TO AUTOLINK: start a new line in roam and type ++ TO CLEAR THE LIST OF AUTOLINKS: while the list of autolinks is displayed type a - at the end, for example "links: word, example phrase.-" will make the line blank. SHOW DIRECTIONS: start a new line and type i+ to bring back these directions`;
     
     document.onkeypress = function() {
       if (event.keyCode == 43){
@@ -35,6 +36,10 @@
         event.preventDefault(); 
         dictionary_exists("add word");
       }
+      // else if(str[0] === "i" && str.length === 1){
+      //   event.preventDefault();
+      //   dictionary_exists("show directions")
+      // }
     }
 
     function handle_minus () {
@@ -73,7 +78,10 @@
             check_link();
           }
           else if(action === "hide dictionary"){
-            hide_dictionary();
+            hide_dictionary_or_directions();
+          }
+          else if(action === "show directions"){
+            show_directions();
           }
         } 
         else {
@@ -85,7 +93,11 @@
 
     }
 
-        function show_dictionary(){
+    function show_directions () {
+        document.activeElement.value = directions;
+    }
+
+        function show_dictionary () {
       let dict_display = "";
       chrome.storage.local.get(["dictionary"], function(result) {
         let dictionary = result.dictionary;
@@ -100,7 +112,7 @@
       }); 
     }
 
-    function hide_dictionary (){
+    function hide_dictionary_or_directions () {
       let str = document.activeElement.value;
       let dict_display = "";
       chrome.storage.local.get(["dictionary"], function(result) {
@@ -112,13 +124,13 @@
         }
         dict_display = dict_display.slice(0, dict_display.length-2);
         dict_display = "links: " + dict_display + ".-";
-        if(str === dict_display){
+        if(str === dict_display || str === directions){
           document.activeElement.value = "";
         }
       });
     }
 
-    function check_link() {
+    function check_link () {
       let str = document.activeElement.value;
       let display_str = document.activeElement.value;
       let check_str = "";
