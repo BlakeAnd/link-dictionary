@@ -207,7 +207,6 @@
     function remove_word(){
       let str = document.activeElement.value;
       let inner_str = str.slice(1, str.length-1);
-      console.log(inner_str.length, inner_str);
       chrome.storage.local.get(["dictionary"], function(result) {
         let dictionary = result.dictionary;
         if(dictionary[inner_str] === "active"){
