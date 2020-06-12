@@ -46,7 +46,6 @@
       let str = document.activeElement.value;
       let inner_str = str.slice(1);
       if(str[0] === "-" && inner_str.length > 0){
-        event.preventDefault(); 
         dictionary_exists("remove word");
       } 
       else {
@@ -207,15 +206,16 @@
 
     function remove_word(){
       let str = document.activeElement.value;
-      let inner_str = str.slice(1);
+      let inner_str = str.slice(1, str.length-1);
+      console.log(inner_str.length, inner_str);
       chrome.storage.local.get(["dictionary"], function(result) {
         let dictionary = result.dictionary;
         if(dictionary[inner_str] === "active"){
           dictionary[inner_str] = "inactive";
+          document.activeElement.value = "";
         }
         chrome.storage.local.set({"dictionary": dictionary}, function() {});
       });
-    document.activeElement.value = "";
     }
 
     function get_cursor_position(){
