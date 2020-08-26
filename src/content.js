@@ -135,7 +135,7 @@
       chrome.storage.local.get(["dictionary"], function(result) {
         let dictionary = result.dictionary;
         for(var key in dictionary) {
-          if(dictionary[key] === "active"){
+          if(dictionary[key] != "inactive"){
             dict_display = dict_display + key + ", ";
           }
         }
