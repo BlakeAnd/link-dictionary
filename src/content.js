@@ -15,6 +15,9 @@
         text_key = event.key;
         handle_other();
       }
+      else if (event.keyCode == 35){
+        handle_hashtag();
+      }
     };
 
     function handle_other(){
@@ -22,6 +25,15 @@
       let inner_str = str.slice(1);
       if(str[0] != "+" && str[0] != "-"){
         dictionary_exists("check for link");
+      }
+    }
+
+    function handle_hashtag() {
+      let str = document.activeElement.value;
+      let inner_str = str.slice(1);
+      if(str[0] === "+" && inner_str.length > 0){
+        event.preventDefault(); 
+        dictionary_exists("add # word");
       }
     }
 
@@ -82,10 +94,16 @@
           else if(action === "show directions"){
             show_directions();
           }
+          else if(action = "add # word"){
+            add_hashtag_word();
+          }
         } 
         else {
           if(action === "add word"){
             add_first_word();
+          }
+          else if(action === "add # word"){
+            add_first_hashtag_word();
           }
         }
       });
@@ -101,7 +119,7 @@
       chrome.storage.local.get(["dictionary"], function(result) {
         let dictionary = result.dictionary;
         for(var key in dictionary) {
-          if(dictionary[key] === "active"){
+          if(dictionary[key] != "inactive"){
             dict_display = dict_display + key + ", ";
           }
         }
@@ -155,6 +173,12 @@
            document.activeElement.selectionEnd = cursor_index + 4;
            break;
           }
+          else if (dictionary[check_str] === "hashtag" && (min === 0 || str[i-1] === " ")){
+            str = str.slice(0, i) + "#" + check_str + " " + str.slice(cursor_index);
+            document.activeElement.value = str;
+            document.activeElement.selectionEnd = cursor_index + 1;
+            break;
+           }
         }
         for(let i = max; i > cursor_index; i--){
           
@@ -204,12 +228,42 @@
       document.activeElement.value = "";
     }
 
+    function add_first_hashtag_word () {
+      let str = document.activeElement.value;
+      let inner_str = str.slice(1);
+      let dictionary = {};
+      longest_link = inner_str.length;
+      dictionary[inner_str] = "hashtag"
+      chrome.storage.local.set({"dictionary": dictionary}, function() {});
+      chrome.storage.local.set({"longest_link": longest_link}, function() {});
+    }
+
+    function add_hashtag_word(){
+      let str = document.activeElement.value;
+      let inner_str = str.slice(1);
+        chrome.storage.local.get(["dictionary"], function(result) {
+          let dictionary = result.dictionary;
+          if(dictionary[inner_str] != "hashtag"){
+            dictionary[inner_str] = "hashtag";
+          }
+          chrome.storage.local.set({"dictionary": dictionary}, function() {});
+        });
+        chrome.storage.local.get(["longest_link"], function(result) {
+          if(inner_str.length > result.longest_link){
+            longest_link = inner_str.length;
+            chrome.storage.local.set({"longest_link": longest_link}, function() {});
+          }  
+        });
+
+      document.activeElement.value = "";
+    }
+
     function remove_word(){
       let str = document.activeElement.value;
       let inner_str = str.slice(1, str.length-1);
       chrome.storage.local.get(["dictionary"], function(result) {
         let dictionary = result.dictionary;
-        if(dictionary[inner_str] === "active"){
+        if(dictionary[inner_str] != "inactive"){
           dictionary[inner_str] = "inactive";
           document.activeElement.value = "";
         }
