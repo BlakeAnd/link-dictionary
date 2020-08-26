@@ -31,7 +31,7 @@
     function handle_hashtag() {
       let str = document.activeElement.value;
       let inner_str = str.slice(1);
-      if(str[0] === "+" && inner_str.length > 0){
+      if(str[0] === "+" && inner_str.length > 0 && inner_str.includes(" ") === false){
         event.preventDefault(); 
         dictionary_exists("add # word");
       }
@@ -280,7 +280,7 @@
     };
     
     //this is a function for dev use only that clears the chrome storage completely
-    //i currently use it by swapping it in where show_dictionary gets called then typing ++ to trigger it, this is clunky but does not happen to often
+    //i currently use it by swapping it in where show_dictionary gets called then typing ++ to trigger it, this is clunky but does not happen too often
     function dev_clear_chrome_storage () {
       chrome.storage.local.clear(function() {
         var error = chrome.runtime.lastError;
