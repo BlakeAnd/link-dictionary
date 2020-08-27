@@ -9,14 +9,21 @@ this is the read me for a project to make a dictionary of auto-linking words in 
 
 * so if we have "dog" saved as am autolink "my dog is the best" will become "my [[dog]] is the best"
 
-#### TO ADD A WORD
+#### TO ADD A LINK
 * start a new line in roam
 
 * type your word on the new line wrapped in + signs like so
 
 +word or phrase+
 
-#### TO REMOVE A WORD
+#### TO ADD A HASHTAG LINK
+* start a new line in roam
+
+* type your word on the new line starting with + and ending with # like so
+
++word or phrase#
+
+#### TO REMOVE A LINK
 
 * same as above but with - signs, like so
 
@@ -28,7 +35,8 @@ this is the read me for a project to make a dictionary of auto-linking words in 
 ++
 * this will display all the links you currently have, like so
 links: word, example phrase.
-#### TO CLEAR THE PRINTED WORDS
+
+#### TO CLEAR THE DISPLAYED WORDS
 * if you have hit ++ and displayed your currently linked word you can type dash at the end of the line to clear it, like so
 
 links: word, example phrase.-

@@ -2,7 +2,7 @@
 
      var longest_link = get_link_at_start();
      let text_key = null;
-     let directions = `you can type - at the end of the directions to clear them away COMMANDS, TO ADD A WORD: start a new line and type +your word or phrase+ TO REMOVE A WORD: start a new line and type -your word or phrase- SEE ALL WORDS SET TO AUTOLINK: start a new line in roam and type ++ TO CLEAR THE LIST OF AUTOLINKS: while the list of autolinks is displayed type a - at the end, for example "links: word, example phrase.-" will make the line blank. SHOW DIRECTIONS: start a new line and type i+ to bring back these directions`;
+     let directions = `you can type - at the end of the directions to clear them away COMMANDS, TO ADD A LINK: start a new line and type +your word or phrase+ TO ADD A # STYLE LINK: start a new line and type +your word or phrase# TO REMOVE A LINK: start a new line and type -your word or phrase- SEE ALL LINKS SET TO AUTOLINK: start a new line in roam and type ++ TO CLEAR THE LIST OF AUTOLINKS: while the list of autolinks is displayed type a - at the end, for example "links: word, example phrase.-" will make the line blank. SHOW DIRECTIONS: start a new line and type autolink+ to bring back these directions`;
     
     document.onkeypress = function() {
       if (event.keyCode == 43){
@@ -44,14 +44,15 @@
         event.preventDefault();
         dictionary_exists("show dictionary");
       } 
+      else if(str === "autolink"){
+        event.preventDefault();
+        dictionary_exists("show directions")
+      }
       else if(str[0] === "+" && inner_str.length > 0){
         event.preventDefault(); 
         dictionary_exists("add word");
       }
-      // else if(str[0] === "i" && str.length === 1){
-      //   event.preventDefault();
-      //   dictionary_exists("show directions")
-      // }
+
     }
 
     function handle_minus () {
@@ -167,7 +168,7 @@
 
         for(let i = min; i < cursor_index-1; i++){
           check_str = str.slice(i, cursor_index - 1);
-          if(dictionary[check_str] === "active" && (min === 0 || str[i-1] === " ")){
+          if(dictionary[check_str] === "bracket" && (min === 0 || str[i-1] === " ")){
            str = str.slice(0, i) + "[[" + check_str + "]] " + str.slice(cursor_index);
            document.activeElement.value = str;
            document.activeElement.selectionEnd = cursor_index + 4;
@@ -203,7 +204,7 @@
       let inner_str = str.slice(1);
       let dictionary = {};
       longest_link = inner_str.length;
-      dictionary[inner_str] = "active"
+      dictionary[inner_str] = "bracket"
       chrome.storage.local.set({"dictionary": dictionary}, function() {});
       chrome.storage.local.set({"longest_link": longest_link}, function() {});
     }
@@ -213,8 +214,8 @@
       let inner_str = str.slice(1);
         chrome.storage.local.get(["dictionary"], function(result) {
           let dictionary = result.dictionary;
-          if(dictionary[inner_str] != "active"){
-            dictionary[inner_str] = "active";
+          if(dictionary[inner_str] != "bracket"){
+            dictionary[inner_str] = "bracket";
           }
           chrome.storage.local.set({"dictionary": dictionary}, function() {});
         });
