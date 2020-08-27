@@ -1,4 +1,8 @@
 this is the read me for a project to make a dictionary of auto-linking words in roam
+
+----------------------------------------------------------------
+#### Get the extension here: 
+https://chrome.google.com/webstore/detail/roam-autolink/ilegcckbllooaoplapjfgkgjkjpbbjpe
 ----------------------------------------------------------------
 ### USER INSTRUCTIONS
 * this currently a basic version of an automatic linking tool for roam
@@ -41,7 +45,7 @@ links: word, example phrase.
 
 links: word, example phrase.-
 
-
+### END OF USER INSTRUCTIONS
 ------------------------------------------------------------------
 
 ### TO DO/IDEAS
